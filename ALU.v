@@ -1,14 +1,15 @@
-module (A,B,ALUcontrol,Result,Z,V,N,C);
+module ALU (A,B,ALUcontrol,Result,Z,V,N,C);
 //input declare
  input [31:0] A,B;
  input [2:0] ALUcontrol;
- input Z,V,N,C; //flags
+
 
  ///output declare
  output [31:0] Result;
+ output Z,V,N,C; //flags
 
  // declaring interim wires
- wire [31:0] a_&_b;
+ wire [31:0] a_and_b;
  wire [31:0] a_or_b;
  wire [31:0] not_b;
  wire cout; //carry out
@@ -20,7 +21,7 @@ module (A,B,ALUcontrol,Result,Z,V,N,C);
 
  //assign //logic design 
  //and operation
- assign a_&_b = A & B;
+ assign a_and_b = A & B;
 
  //or operation
  assign a_or_b = A | B;
@@ -37,7 +38,7 @@ module (A,B,ALUcontrol,Result,Z,V,N,C);
  //assign mux2
  assign mux_2 = (ALUcontrol[1:0] == 2'b00) ? sum : 
                 (ALUcontrol[1:0] == 2'b01) ? sum :
-                 (ALUcontrol[1:0] == 2'b10) ? a_&_b : a_or_b;  
+                 (ALUcontrol[1:0] == 2'b10) ? a_and_b : a_or_b;  
  //assign result 
  assign Result = mux_2;    
 
